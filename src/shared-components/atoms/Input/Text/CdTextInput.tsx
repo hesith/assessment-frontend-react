@@ -4,14 +4,19 @@ import { InputType } from "reactstrap/types/lib/Input";
 export interface CdTextInputProps {
     type?: InputType;
     placeholder?: string;
+    onChange?: (data: React.ChangeEvent<HTMLInputElement>) => void;
+    invalid?: boolean;
 }
 
-const CdTextInput : React.FC<CdTextInputProps> = ({type, placeholder}) => {
+const CdTextInput : React.FC<CdTextInputProps> = ({type, placeholder, onChange, invalid}) => {
     return (
-        <div>
-            <Input type={type} placeholder={placeholder}>
+            <Input 
+                type={type} 
+                placeholder={placeholder}
+                onChange={onChange}
+                invalid={invalid}
+            >
             </Input>
-        </div>
     )
 };
 

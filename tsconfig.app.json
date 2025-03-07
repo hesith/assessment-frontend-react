@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src", "public/locals/en/common-messages.ts", "public/locals/en/login-error-messages.ts"]
 }
