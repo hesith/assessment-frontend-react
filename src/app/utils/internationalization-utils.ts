@@ -1,5 +1,5 @@
-import common from '../../public/locals/en/common.json';
-import auth from '../../public/locals/en/auth-module.json';
+import common from '../../../public/locals/en/common.json';
+import auth from '../../../public/locals/en/auth-module.json';
 
 const combinedData = {
     common, 

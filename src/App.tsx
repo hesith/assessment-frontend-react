@@ -1,14 +1,11 @@
 import './App.css'
-import CdLoginForm from './shared-components/templates/LoginForm/CdLoginForm'
+import SignIn from './app/modules/auth/SignIn'
 
 function App() {
   return (
       <div>
-        <CdLoginForm 
-          
-            >
-          </CdLoginForm>  
-        </div>
+        <SignIn/>
+      </div>
   )
 }
 

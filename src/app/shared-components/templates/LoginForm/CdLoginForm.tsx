@@ -3,12 +3,13 @@ import CdButton from "../../atoms/Button/CdButton";
 import CdCard from "../../atoms/Card/CdCard";
 import CdTextInputWithLabel from "../../molecules/TextInputWithLabel/CdTextInputWithLabel";
 import { useLanguage } from "../../../store/context/LanguageContext";
+import { LoginRequest } from "../../../types/interfaces/request/login";
 
 export interface CdLoginFormProps {
-    onSubmit: () => void;
+    onSubmit: (data: LoginRequest) => void;
 }
 
-const CdLoginForm : React.FC<CdLoginFormProps> = () => {
+const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit}) => {
     const language = useLanguage();
 
     const [email, setEmail] = React.useState<string>('');
@@ -28,12 +29,19 @@ const CdLoginForm : React.FC<CdLoginFormProps> = () => {
 
     const handlePasswordTextChange = (data:React.ChangeEvent<HTMLInputElement>) => {
         const content = data.target.value;
-        setPassword(data.target.value);
+        setPassword(content);
         setPasswordInvalidMsg(language?.common.EMPTY)
     }
 
     const handleSubmit = () => {
-        validateForm();
+        if(validateForm()===true){
+            const data : LoginRequest = {
+                email,
+                password
+            };
+
+            onSubmit(data);
+        }
     }
 
     const validateForm = () => {
@@ -59,6 +67,8 @@ const CdLoginForm : React.FC<CdLoginFormProps> = () => {
             setPasswordValid(true);
             setPasswordInvalidMsg(language?.common.EMPTY);
         };
+
+        return true;
     }
 
     if(language===undefined) return null;
