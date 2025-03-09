@@ -1,10 +1,10 @@
-import './App.css'
-import SignIn from './app/modules/auth/SignIn'
+import RenderRoutes from './app/config/routing/RenderRoutes'
+import appRoutes from './app/config/routing/routesConfig'
 
 function App() {
   return (
       <div>
-        <SignIn/>
+        <RenderRoutes routes={appRoutes}/>
       </div>
   )
 }

@@ -22,14 +22,14 @@ const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit}) => {
 
     const handleEmailTextChange = (data:React.ChangeEvent<HTMLInputElement>) => {
         const content = data.target.value;
-        setEmail(content);
+        setEmail(content.trim());
         setEmailInvalidMsg(language?.common.EMPTY)
   
     }
 
     const handlePasswordTextChange = (data:React.ChangeEvent<HTMLInputElement>) => {
         const content = data.target.value;
-        setPassword(content);
+        setPassword(content.trim());
         setPasswordInvalidMsg(language?.common.EMPTY)
     }
 

@@ -1,14 +1,13 @@
 import React, { useEffect } from "react";
-import { TranslatedText } from "../../utils/internationalization-utils";
+import { combinedData, TranslatedText } from "../../utils/internationalization-utils";
 
-const LanguageContext = React.createContext({});
+const LanguageContext = React.createContext(combinedData);
 
 interface LanguageProviderProps {
     children: React.ReactNode;
 }
 
 export const LanguageProvider : React.FC<LanguageProviderProps> = ({children}) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const [languageData, setLanguageData] = React.useState<any>();
 
     useEffect(() => {

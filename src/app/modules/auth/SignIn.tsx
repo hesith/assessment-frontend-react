@@ -4,8 +4,8 @@ import { LoginRequest } from "../../types/interfaces/request/login";
 
 const SignIn : React.FC = () => {
 
-    const handleSignIn = (data: LoginRequest) => {
-        authService.login(data);
+    const handleSignIn = async (data: LoginRequest) => {
+        console.log(await authService.login(data));
     }
 
     return (

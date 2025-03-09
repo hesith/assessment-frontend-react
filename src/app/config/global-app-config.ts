@@ -3,5 +3,5 @@ interface GlobalAppConfig{
 }
 
 export const globalAppConfig : GlobalAppConfig = {
-    baseApiUrl: 'https://testApi.com'
+    baseApiUrl: 'http://localhost:5000/api'
 }
