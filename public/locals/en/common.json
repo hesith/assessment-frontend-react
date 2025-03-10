@@ -1,4 +1,6 @@
 {
     "EMAIL": "Email",
-    "EMPTY": ""
+    "EMPTY": "",
+    "NOT_LOGGED_IN": "Not Logged In",
+    "LOGOUT": "Log Out"
 }

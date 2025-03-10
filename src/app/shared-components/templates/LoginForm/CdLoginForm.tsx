@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CdButton from "../../atoms/Button/CdButton";
 import CdCard from "../../atoms/Card/CdCard";
 import CdTextInputWithLabel from "../../molecules/TextInputWithLabel/CdTextInputWithLabel";
@@ -7,9 +7,11 @@ import { LoginRequest } from "../../../types/interfaces/request/login";
 
 export interface CdLoginFormProps {
     onSubmit: (data: LoginRequest) => void;
+    emailInvalidResMsg: string;
+    passwordInvalidResMsg: string;
 }
 
-const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit}) => {
+const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit, emailInvalidResMsg, passwordInvalidResMsg}) => {
     const language = useLanguage();
 
     const [email, setEmail] = React.useState<string>('');
@@ -24,7 +26,6 @@ const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit}) => {
         const content = data.target.value;
         setEmail(content.trim());
         setEmailInvalidMsg(language?.common.EMPTY)
-  
     }
 
     const handlePasswordTextChange = (data:React.ChangeEvent<HTMLInputElement>) => {
@@ -39,7 +40,6 @@ const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit}) => {
                 email,
                 password
             };
-
             onSubmit(data);
         }
     }
@@ -70,6 +70,17 @@ const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit}) => {
 
         return true;
     }
+
+    useEffect(()=>{
+        if(emailInvalidResMsg!==''){
+            setEmailInvalidMsg(emailInvalidResMsg);
+            setEmailValid(false);
+        }
+        if(passwordInvalidResMsg!==''){
+            setPasswordInvalidMsg(passwordInvalidResMsg);
+            setPasswordValid(false);
+        }
+    }, [emailInvalidResMsg, passwordInvalidResMsg])
 
     if(language===undefined) return null;
     return (
@@ -102,7 +113,7 @@ const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit}) => {
                                     invalidText={passwordInvalidMsg}
                                     >
                                 </CdTextInputWithLabel>
-                                
+
                             <div className="d-flex justify-content-center">
                                 <CdButton onClick={handleSubmit} className="mt-2" color="primary" text="Login"></CdButton>
                             </div>
