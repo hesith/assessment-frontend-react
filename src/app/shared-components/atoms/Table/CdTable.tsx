@@ -15,7 +15,7 @@ const CdTable : React.FC<CdTableProps> = ({dataSource, bordered}) => {
 
     const sort = (key: string) => {
         const fieldType = typeof(data[0] as any)[key];
-        let sortedData;
+        const dupData = data;
 
         if(sortingOrder==SortingOrder.Ascending){
             setSortingOrder(SortingOrder.Descending);
@@ -24,16 +24,25 @@ const CdTable : React.FC<CdTableProps> = ({dataSource, bordered}) => {
         }
   
         if(fieldType == 'number'){
-           sortedData = sortingOrder==SortingOrder.Ascending ? 
-                            data.sort((a:any, b:any) => b[key] - a[key]) :
-                            data.sort((a:any, b:any) => a[key] - b[key]);
+           if(sortingOrder==SortingOrder.Ascending)
+           {
+                dupData.sort((a:any, b:any) => b[key] - a[key]);
+           }
+           else
+           {
+                dupData.sort((a:any, b:any) => a[key] - b[key]);
+           }
         }else{
-            sortedData = sortingOrder==SortingOrder.Ascending ? 
-                            data.sort((a, b) => b[key].localeCompare(a[key])) :
-                            data.sort((a, b) => a[key].localeCompare(b[key]));
-        }
-        
-        setData(sortedData)
+            if(sortingOrder==SortingOrder.Ascending)
+            {
+                dupData.sort((a:any, b:any) => b[key].localeCompare(a[key]));
+            } 
+            else
+            {
+                dupData.sort((a:any, b:any) => a[key].localeCompare(b[key]));
+            }
+        }    
+        setData(dupData)
     }
     
     useEffect(()=>{
