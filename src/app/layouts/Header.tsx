@@ -1,28 +1,29 @@
 import { useEffect, useState } from "react";
-import { ListGroup, ListGroupItem, Navbar, NavbarBrand, NavbarToggler,Offcanvas, OffcanvasBody, OffcanvasHeader } from "reactstrap";
-import { mainNavigation } from "../config/app-navigation";
+import { Navbar, NavbarBrand, NavbarToggler } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import CdButton from "../shared-components/atoms/Button/CdButton";
 import { useLanguage } from "../store/context/LanguageContext";
 import { authDataService } from "../services/data/AuthDataService";
 import { clearUserData } from "../store/reducers/userSlice";
+import { setSidebar } from "../store/reducers/sidebarSlice";
 
-const Header: React.FC = () => {
+interface HeaderProps{
+    hidden: boolean
+}
+
+const Header: React.FC<HeaderProps> = ({hidden}) => {
     const navigate = useNavigate();
     const language = useLanguage();
     const user = useSelector((state:any)=> state.user);
+    const isSidebarOpen:boolean = useSelector((state:any)=> state?.sidebar?.isOpen);
     const dispatch = useDispatch();
     
-    const [isOpen, setIsOpen] = useState(false);
-
     const [userData, setUserData] = useState<any>('')
     
-    const toggleNavbar = () => setIsOpen(!isOpen);
-
-    const handleMenuClick = (url: string) => {
-        navigate(url);
-    }
+    const toggleNavbar = () => {
+        dispatch(setSidebar({isOpen:!isSidebarOpen}));
+    };
 
     const handleLogOut = () =>{
         authDataService.clearSession();
@@ -35,8 +36,7 @@ const Header: React.FC = () => {
     },[user])
 
     return (
-        <>
-            <Navbar className="nav-bar" dark color="danger" fixed="top">
+            <Navbar hidden={hidden} className="nav-bar" dark color="danger" fixed="top">
                 <NavbarToggler onClick={toggleNavbar}></NavbarToggler>
                 <NavbarBrand>
                     <CdButton 
@@ -49,26 +49,7 @@ const Header: React.FC = () => {
                     {userData?.firstName==''? language?.common.NOT_LOGGED_IN: userData.firstName+" "+userData.lastName}
                 </NavbarBrand>
             </Navbar>
-            <Offcanvas isOpen={isOpen} toggle={toggleNavbar} color="success">
-                <OffcanvasHeader toggle={toggleNavbar}>
-                    Menu
-                </OffcanvasHeader>
-                <OffcanvasBody onClick={toggleNavbar}>
-                <ListGroup flush>
-                    {mainNavigation.map((menuItem)=> 
-                    <ListGroupItem 
-                        key={menuItem.id}
-                        action
-                        active
-                        tag="button"
-                        onClick={()=> handleMenuClick(menuItem.url)}
-                    >
-                        {menuItem.label}
-                    </ListGroupItem>)}
-                </ListGroup>
-                </OffcanvasBody>
-            </Offcanvas>
-        </>
+            
     )
 }
 

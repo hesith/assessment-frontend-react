@@ -19,8 +19,8 @@ export class ApiInterceptor{
     private initializeRequest(){
         this.axios.interceptors.request.use(
             async (config) => {
-                try {
-                  const token = 'testtoken';
+                try { 
+                  const token = localStorage.getItem('accessToken');
                   if (token) {
                     config.headers["Authorization"] = `Bearer ${token}`;
                   }
