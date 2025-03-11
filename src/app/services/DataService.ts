@@ -14,6 +14,18 @@ class DataService extends CoreService{
                     })
             })
     }
+
+    getDashboardData = () : Promise<any> => {
+        return new Promise((resolve, reject) => {
+            this.axios.get(globalAppConfig.baseApiUrl+'/dashboard/data')
+                .then(async(response) => {
+                    resolve(response.data)
+                })
+                .catch((e) => {
+                    reject(new Error(e)); 
+                })
+        })
+    }
 }
 
 export const dataService = new DataService();

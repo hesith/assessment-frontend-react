@@ -1,5 +1,5 @@
 {
-    "LOGIN_PAGE_TITLE": "Login to the System",
+    "LOGIN_PAGE_TITLE": "Log in to the System",
     "EMPTY_EMAIL" : "Please enter your email address",
     "EMPTY_PASSWORD" : "Please enter your password",
     "INVALID_CREDENTIALS" : "Invalid email or password"

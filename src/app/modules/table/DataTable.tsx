@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { dataService } from "../../services/DataService";
 import { Pagination } from "../../types/interfaces/request/pagination";
 import { globalAppConfig } from "../../config/global-app-config";
-import CdTableWithPagination from "../../shared-components/molecules/CdTableWithPagination/CdTableWithPagination";
+import CdTableWithPagination from "../../shared-components/molecules/TableWithPagination/CdTableWithPagination";
 
 const DataTable: React.FC = () => {
     const [dataSource, setDataSource] = useState([]);

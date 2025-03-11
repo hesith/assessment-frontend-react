@@ -1,8 +1,9 @@
 {
-    "DASHBOARD_COMPONENT_1": "Dashboard Component 1",
-    "DASHBOARD_COMPONENT_2": "Dashboard Component 2",
-    "DASHBOARD_COMPONENT_3": "Dashboard Component 3",
-    "DASHBOARD_COMPONENT_4": "Dashboard Component 4",
+    "DASHBOARD_COMPONENT_1": "Total Books",
+    "DASHBOARD_COMPONENT_2": "Top 10 Oldest Books",
+    "DASHBOARD_COMPONENT_3": "Top 10 Newest Books",
+    "DASHBOARD_COMPONENT_4": "Oldest Book",
+    "DASHBOARD_COMPONENT_5": "Newest Book",
     "DASHBOARD_CONTENT_1": "Dashboard Content 1",
     "DASHBOARD_CONTENT_2": "Dashboard Content 2",
     "DASHBOARD_CONTENT_3": "Dashboard Content 3",

@@ -87,7 +87,7 @@ const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit, emailInvalidResMsg,
 
     if(language===undefined) return null;
     return (
-        <div className="w-25">  
+        <div className="w-25 Login">  
                 <CdCard 
                     cardTitle={language?.auth.LOGIN_PAGE_TITLE}
                     cardContent={(
@@ -118,10 +118,12 @@ const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit, emailInvalidResMsg,
                                 </CdTextInputWithLabel>
 
                             <div className="d-flex justify-content-center">
-                                <CdButton onClick={handleSubmit} className="mt-2" color="primary" text="Login"></CdButton>
+                                <CdButton onClick={handleSubmit} className="mt-2" color="success" text="Login"></CdButton>
                             </div>
                         </div>
-                    )}>
+                    )}
+                    imgSrc="../../../../../public/assets/icons/logo.svg"
+                    >
 
                 </CdCard>
         </div>
