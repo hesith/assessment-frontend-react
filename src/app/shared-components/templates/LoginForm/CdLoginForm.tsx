@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import CdButton from "../../atoms/Button/CdButton";
 import CdCard from "../../atoms/Card/CdCard";
 import CdTextInputWithLabel from "../../molecules/TextInputWithLabel/CdTextInputWithLabel";
@@ -22,19 +22,22 @@ const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit, emailInvalidResMsg,
     const [passwordValid, setPasswordValid] = React.useState<boolean>(false);
     const [passwordInvalidMsg, setPasswordInvalidMsg] = React.useState<string>('');
 
-    const handleEmailTextChange = (data:React.ChangeEvent<HTMLInputElement>) => {
+    const handleEmailTextChange = useCallback((data:React.ChangeEvent<HTMLInputElement>) => {
         const content = data.target.value;
         setEmail(content.trim());
+        setEmailValid(true);
         setEmailInvalidMsg(language?.common.EMPTY)
-    }
+    },[language])
 
-    const handlePasswordTextChange = (data:React.ChangeEvent<HTMLInputElement>) => {
+    const handlePasswordTextChange = useCallback((data:React.ChangeEvent<HTMLInputElement>) => {
         const content = data.target.value;
         setPassword(content.trim());
+        setPasswordValid(true);
         setPasswordInvalidMsg(language?.common.EMPTY)
-    }
+    },[language])
 
-    const handleSubmit = () => {
+    const handleSubmit = useCallback(() => {
+
         if(validateForm()===true){
             const data : LoginRequest = {
                 email,
@@ -42,7 +45,7 @@ const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit, emailInvalidResMsg,
             };
             onSubmit(data);
         }
-    }
+    },[email,password, language])
 
     const validateForm = () => {
         if(email.length === 0) 
@@ -94,7 +97,7 @@ const CdLoginForm : React.FC<CdLoginFormProps> = ({onSubmit, emailInvalidResMsg,
                                     inputProps={{
                                         type:'email', 
                                         onChange: handleEmailTextChange,
-                                        invalid: !emailValid && emailInvalidMsg !== ''
+                                        invalid: !emailValid && emailInvalidMsg !== '',
                                     }}
                                     invalid={!emailValid}
                                     invalidText={emailInvalidMsg}

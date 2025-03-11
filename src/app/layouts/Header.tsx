@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Navbar, NavbarBrand, NavbarToggler } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,11 +25,11 @@ const Header: React.FC<HeaderProps> = ({hidden}) => {
         dispatch(setSidebar({isOpen:!isSidebarOpen}));
     };
 
-    const handleLogOut = () =>{
+    const handleLogOut = useCallback(() =>{
         authDataService.clearSession();
         dispatch(clearUserData());
         navigate("/auth/login");
-    }
+    },[])
 
     useEffect(()=>{
         setUserData(user);

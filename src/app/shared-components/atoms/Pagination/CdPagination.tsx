@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { Pagination, PaginationItem, PaginationLink } from "reactstrap"
 import { PaginationButton } from "../../../types/enums/pagination";
 
@@ -10,7 +10,7 @@ interface CdPaginationProps{
 const CdPagination: React.FC<CdPaginationProps> = ({pages, onNavigate}) =>{
     const [active, setActive] = useState(0);
 
-    const handleNavigate = (button: PaginationButton, number: number = -1) => {
+    const handleNavigate = useCallback((button: PaginationButton, number: number = -1) => {
         switch (button){
             case PaginationButton.First:
                 setActive(0);
@@ -28,7 +28,7 @@ const CdPagination: React.FC<CdPaginationProps> = ({pages, onNavigate}) =>{
                 setActive(number);
                 break;
         }
-    }
+    },[pages,active])
 
     useEffect(()=>{
         onNavigate(active);

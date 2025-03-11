@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { dataService } from "../../services/DataService";
 import { Pagination } from "../../types/interfaces/request/pagination";
 import { globalAppConfig } from "../../config/global-app-config";
@@ -19,9 +19,9 @@ const DataTable: React.FC = () => {
         LoadTableData();
     },[pageNo])
     
-    const handleNavigate = (pageIndex:number) => {
+    const handleNavigate = useCallback((pageIndex:number) => {
         setPageNo(pageIndex+1);
-    }
+    },[])
 
     if(dataSource.length>0){
         return (

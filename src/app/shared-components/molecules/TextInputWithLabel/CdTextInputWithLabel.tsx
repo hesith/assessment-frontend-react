@@ -6,7 +6,7 @@ export interface CdTextInputWithLabelProps  {
     label: string,
     inputProps?: CdTextInputProps,
     invalid?: boolean,
-    invalidText?: string
+    invalidText?: string,
 }
 
 const CdTextInputWithLabel: React.FC<CdTextInputWithLabelProps> = ({label, inputProps, invalid, invalidText}) => {

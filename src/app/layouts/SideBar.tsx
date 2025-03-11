@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ListGroup, ListGroupItem, Offcanvas, OffcanvasBody, OffcanvasHeader } from "reactstrap";
 import { mainNavigation } from "../config/app-navigation";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { setSidebar } from "../store/reducers/sidebarSlice";
 import { setCurrentNavigation } from "../store/reducers/navigationSlice";
 
@@ -21,16 +21,16 @@ const SideBar : React.FC<SideBarProps> = ({hidden}) => {
     const [activePath, setActivePath] = useState(defPath);
 
 
-    const handleMenuClick = (menuItem:any) => {
+    const handleMenuClick = useCallback((menuItem:any) => {
         dispatch(setCurrentNavigation({id: menuItem?.id}))
         setActivePath(menuItem?.id)
         navigate(menuItem?.url);
-    }
+    },[])
 
-    const toggleNavbar = () => {
+    const toggleNavbar = useCallback(() => {
             dispatch(setSidebar({isOpen:!isOpen}));
             setIsOpen(!isOpen);
-    };
+    },[isOpen]);
     
     useEffect(()=>{
         setIsOpen(barState)
